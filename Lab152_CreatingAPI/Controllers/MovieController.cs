@@ -50,10 +50,18 @@ namespace Lab152_CreatingAPI.Controllers
         }
 
         [HttpGet("random")]
-        public Movie GetMovieRandom(int id)
+        public Movie GetMovieRandom(string genre = null)
         {
-            Movie mov = dal.GetMovieRandom();
-            return mov; //serialize the parameter into JSON and return an Ok (20x)
+            if (genre == null)
+            {
+                Movie mov = dal.GetMovieRandom();
+                return mov; //serialize the parameter into JSON and return an Ok (20x)
+            }
+            else
+            {
+                Movie mov = dal.GetMovieRandomByGenre(genre);
+                return mov; //serialize the parameter into JSON and return an Ok (20x)
+            }
         }
 
         [HttpGet]
