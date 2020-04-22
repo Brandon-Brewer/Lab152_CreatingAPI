@@ -42,25 +42,32 @@ namespace Lab152_CreatingAPI.Controllers
         //    return mov; //serialize the parameter into JSON and return an Ok (20x)
         //}
 
-        [HttpGet("random/{genre}")]
-        public Movie GetMovieRandomByGenre(string genre)
-        {
-            Movie mov = dal.GetMovieRandomByGenre(genre);
-            return mov; //serialize the parameter into JSON and return an Ok (20x)
-        }
-
         [HttpGet("random")]
         public Movie GetMovieRandom(string genre = null)
         {
             if (genre == null)
             {
                 Movie mov = dal.GetMovieRandom();
-                return mov; //serialize the parameter into JSON and return an Ok (20x)
+                if (mov == null)
+                {
+                    return new Movie(); //serialize the parameter into JSON and return an Ok (20x)
+                }
+                else
+                {
+                    return mov; //serialize the parameter into JSON and return an Ok (20x)
+                }
             }
             else
             {
                 Movie mov = dal.GetMovieRandomByGenre(genre);
-                return mov; //serialize the parameter into JSON and return an Ok (20x)
+                if (mov == null)
+                {
+                    return new Movie(); //serialize the parameter into JSON and return an Ok (20x)
+                }
+                else
+                {
+                    return mov; //serialize the parameter into JSON and return an Ok (20x)
+                }
             }
         }
 
@@ -70,12 +77,26 @@ namespace Lab152_CreatingAPI.Controllers
             if (genres == null)
             {
                 IEnumerable<Movie> Movies = dal.GetMoviesAll();
-                return Movies; //serialize the parameter into JSON and return an Ok (20x)
+                if (Movies == null)
+                {
+                    return new List<Movie>(); //serialize the parameter into JSON and return an Ok (20x)
+                }
+                else
+                {
+                    return Movies; //serialize the parameter into JSON and return an Ok (20x)
+                }
             }
             else
             {
                 IEnumerable<Movie> Movies = dal.GetMoviesByGenres(genres);
-                return Movies;
+                if (Movies == null)
+                {
+                    return new List<Movie>(); //serialize the parameter into JSON and return an Ok (20x)
+                }
+                else
+                {
+                    return Movies; //serialize the parameter into JSON and return an Ok (20x)
+                }
             }
         }
 
