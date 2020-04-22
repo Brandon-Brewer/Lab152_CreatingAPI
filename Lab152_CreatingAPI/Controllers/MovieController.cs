@@ -20,60 +20,74 @@ namespace Lab152_CreatingAPI.Controllers
             dal = dalObject;
         }
 
-        [HttpDelete("{id}")]
-        public Object Delete(int id)
-        {
-            int result = dal.DeleteMovieById(id);
-
-            if (result > 0)
-            {
-                return new { success = true };
-            }
-            else
-            {
-                return new { success = false };
-            }
-        }
-
-        [HttpGet("{id}")]
-        public Movie GetSingleMovie(int id)
-        {
-            Movie mov = dal.GetMovieById(id);
-            return mov; //serialize the parameter into JSON and return an Ok (20x)
-        }
-
-        //[HttpGet]
-        //public IEnumerable<Movie> Get(string genres = null)
+        //[HttpDelete("{id}")]
+        //public Object Delete(int id)
         //{
-        //    if (genres == null)
+        //    int result = dal.DeleteMovieById(id);
+
+        //    if (result > 0)
         //    {
-        //        IEnumerable<Movie> Movies = dal.GetMoviesAll();
-        //        return Movies; //serialize the parameter into JSON and return an Ok (20x)
+        //        return new { success = true };
         //    }
         //    else
         //    {
-        //        IEnumerable<Movie> Movies = dal.GetMoviesByGenres(genres);
-        //        return Movies;
+        //        return new { success = false };
         //    }
         //}
 
-        //valid but superceded by Category controller
-        //[HttpGet("genres")]
-        //public string[] GetGenres()
+        //[HttpGet("{id}")]
+        //public Movie GetSingleMovie(int id)
         //{
-        //    return dal.GetMovieGenres();
+        //    Movie mov = dal.GetMovieById(id);
+        //    return mov; //serialize the parameter into JSON and return an Ok (20x)
         //}
 
-        [HttpPost]
-        public Object Post(Movie m)
+        [HttpGet("random/{genre}")]
+        public Movie GetMovieRandomByGenre(string genre)
         {
-            int newId = dal.CreateMovie(m);
-
-            if (newId < 0)
-            {
-                return new { success = false };
-            }
-            return new { success = true, id = newId };
+            Movie mov = dal.GetMovieRandomByGenre(genre);
+            return mov; //serialize the parameter into JSON and return an Ok (20x)
         }
+
+        [HttpGet("random")]
+        public Movie GetMovieRandom(int id)
+        {
+            Movie mov = dal.GetMovieRandom();
+            return mov; //serialize the parameter into JSON and return an Ok (20x)
+        }
+
+        [HttpGet]
+        public IEnumerable<Movie> Get(string genres = null)
+        {
+            if (genres == null)
+            {
+                IEnumerable<Movie> Movies = dal.GetMoviesAll();
+                return Movies; //serialize the parameter into JSON and return an Ok (20x)
+            }
+            else
+            {
+                IEnumerable<Movie> Movies = dal.GetMoviesByGenres(genres);
+                return Movies;
+            }
+        }
+
+        //valid but superceded by Category controller
+        [HttpGet("genres")]
+        public string[] GetGenres()
+        {
+            return dal.GetMovieGenres();
+        }
+
+        //[HttpPost]
+        //public Object Post(Movie m)
+        //{
+        //    int newId = dal.CreateMovie(m);
+
+        //    if (newId < 0)
+        //    {
+        //        return new { success = false };
+        //    }
+        //    return new { success = true, id = newId };
+        //}
     }
 }

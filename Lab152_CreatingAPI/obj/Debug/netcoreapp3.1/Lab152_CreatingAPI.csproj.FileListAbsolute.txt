@@ -91,3 +91,11 @@ C:\Users\BBREWER2-\source\repos\Lab152_CreatingAPI\Lab152_CreatingAPI\bin\Debug\
 C:\Users\BBREWER2-\source\repos\Lab152_CreatingAPI\Lab152_CreatingAPI\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\BBREWER2-\source\repos\Lab152_CreatingAPI\Lab152_CreatingAPI\obj\Debug\netcoreapp3.1\Lab152_CreatingAPI.csproj.CopyComplete
 C:\Users\BBREWER2-\source\repos\Lab152_CreatingAPI\Lab152_CreatingAPI\bin\Debug\netcoreapp3.1\Dapper.dll
+C:\Users\BBREWER2-\source\repos\Lab152_CreatingAPI\Lab152_CreatingAPI\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\BBREWER2-\source\repos\Lab152_CreatingAPI\Lab152_CreatingAPI\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\BBREWER2-\source\repos\Lab152_CreatingAPI\Lab152_CreatingAPI\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\BBREWER2-\source\repos\Lab152_CreatingAPI\Lab152_CreatingAPI\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\BBREWER2-\source\repos\Lab152_CreatingAPI\Lab152_CreatingAPI\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\BBREWER2-\source\repos\Lab152_CreatingAPI\Lab152_CreatingAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\BBREWER2-\source\repos\Lab152_CreatingAPI\Lab152_CreatingAPI\obj\Debug\netcoreapp3.1\Lab152_CreatingAPI.csproj.CoreCompileInputs.cache
+C:\Users\BBREWER2-\source\repos\Lab152_CreatingAPI\Lab152_CreatingAPI\obj\Debug\netcoreapp3.1\Lab152_CreatingAPI.MvcApplicationPartsAssemblyInfo.cache

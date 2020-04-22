@@ -18,50 +18,50 @@ namespace Lab152_CreatingAPI.Services
             connectionString = config.GetConnectionString("movieDB");
         }
 
-        public int CreateMovie(Movie m)
-        {
-            SqlConnection connection = null;
-            string queryString = "INSERT INTO Products (Name, Price, Description, Category)";
-            queryString += " VALUES (@Name, @Price, @Description, @Category);";
-            queryString += " SELECT SCOPE_IDENTITY();";
-            int newId;
+        //public int CreateMovie(Movie m)
+        //{
+        //    SqlConnection connection = null;
+        //    string queryString = "INSERT INTO Products (Name, Price, Description, Category)";
+        //    queryString += " VALUES (@Name, @Price, @Description, @Category);";
+        //    queryString += " SELECT SCOPE_IDENTITY();";
+        //    int newId;
 
-            try
-            {
-                connection = new SqlConnection(connectionString);
-                newId = connection.ExecuteScalar<int>(queryString, m);
-            }
-            catch (Exception e)
-            {
-                newId = -1;
-                //log the error--get details from e
-            }
-            finally //cleanup!
-            {
-                if (connection != null)
-                {
-                    connection.Close(); //explicitly closing the connection
-                }
-            }
+        //    try
+        //    {
+        //        connection = new SqlConnection(connectionString);
+        //        newId = connection.ExecuteScalar<int>(queryString, m);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        newId = -1;
+        //        //log the error--get details from e
+        //    }
+        //    finally //cleanup!
+        //    {
+        //        if (connection != null)
+        //        {
+        //            connection.Close(); //explicitly closing the connection
+        //        }
+        //    }
 
-            return newId;
-        }
+        //    return newId;
+        //}
 
-        public int DeleteMovieById(int id)
-        {
-            //TODO: Refactor with try/catch
-            SqlConnection connection = new SqlConnection(connectionString);
-            string deleteCommand = "DELETE FROM Products WHERE ID = @id";
+        //public int DeleteMovieById(int id)
+        //{
+        //    //TODO: Refactor with try/catch
+        //    SqlConnection connection = new SqlConnection(connectionString);
+        //    string deleteCommand = "DELETE FROM Products WHERE ID = @id";
 
-            int rows = connection.Execute(deleteCommand, new { id = id });
+        //    int rows = connection.Execute(deleteCommand, new { id = id });
 
-            return rows;
-        }
+        //    return rows;
+        //}
 
         public string[] GetMovieGenres()
         {
             SqlConnection connection = null;
-            string queryString = "SELECT DISTINCT Category FROM Products";
+            string queryString = "SELECT DISTINCT genres FROM Movies";
             IEnumerable<Movie> Movies = null;
 
             try
@@ -104,7 +104,7 @@ namespace Lab152_CreatingAPI.Services
         public IEnumerable<Movie> GetMoviesAll()
         {
             SqlConnection connection = null;
-            string queryString = "SELECT * FROM Products";
+            string queryString = "SELECT * FROM Movies";
             IEnumerable<Movie> Movies = null;
 
             try
@@ -130,13 +130,13 @@ namespace Lab152_CreatingAPI.Services
         public IEnumerable<Movie> GetMoviesByGenres(string genres)
         {
             SqlConnection connection = null;
-            string queryString = "SELECT * FROM Products WHERE Category = @cat";
+            string queryString = "SELECT * FROM Movies WHERE genres = @val";
             IEnumerable<Movie> Movies = null;
 
             try
             {
                 connection = new SqlConnection(connectionString);
-                Movies = connection.Query<Movie>(queryString, new { cat = genres });
+                Movies = connection.Query<Movie>(queryString, new { val = genres });
             }
             catch (Exception e)
             {
@@ -153,16 +153,17 @@ namespace Lab152_CreatingAPI.Services
             return Movies;
         }
 
-        public Movie GetMovieById(int id)
+
+        public Movie GetMovieRandom()
         {
             SqlConnection connection = null;
-            string queryString = "SELECT * FROM Products WHERE Id = @id";
+            string queryString = "SELECT TOP 1 * FROM Movies ORDER BY NEWID()";
             Movie movie = null;
 
             try
             {
                 connection = new SqlConnection(connectionString);
-                movie = connection.QueryFirstOrDefault<Movie>(queryString, new { id = id });
+                movie = connection.QueryFirstOrDefault<Movie>(queryString);
             }
             catch (Exception e)
             {
@@ -178,5 +179,58 @@ namespace Lab152_CreatingAPI.Services
 
             return movie;
         }
+
+
+        public Movie GetMovieRandomByGenre(string genre)
+        {
+            SqlConnection connection = null;
+            string queryString = "SELECT TOP 1 * FROM Movies WHERE genres = @val ORDER BY NEWID()";
+            Movie movie = null;
+
+            try
+            {
+                connection = new SqlConnection(connectionString);
+                movie = connection.QueryFirstOrDefault<Movie>(queryString, new { val = genre } );
+            }
+            catch (Exception e)
+            {
+                //log the error--get details from e
+            }
+            finally //cleanup!
+            {
+                if (connection != null)
+                {
+                    connection.Close(); //explicitly closing the connection
+                }
+            }
+
+            return movie;
+        }
+
+        //public Movie GetMovieById(int id)
+        //{
+        //    SqlConnection connection = null;
+        //    string queryString = "SELECT * FROM Products WHERE Id = @id";
+        //    Movie movie = null;
+
+        //    try
+        //    {
+        //        connection = new SqlConnection(connectionString);
+        //        movie = connection.QueryFirstOrDefault<Movie>(queryString, new { id = id });
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        //log the error--get details from e
+        //    }
+        //    finally //cleanup!
+        //    {
+        //        if (connection != null)
+        //        {
+        //            connection.Close(); //explicitly closing the connection
+        //        }
+        //    }
+
+        //    return movie;
+        //}
     }
 }

@@ -8,11 +8,17 @@ namespace Lab152_CreatingAPI.Services
 {
     public interface IDAL
     {
-        int CreateMovie(Movie m);
-        int DeleteMovieById(int id);
-        Movie GetMovieById(int id);
         IEnumerable<Movie> GetMoviesAll();
+        
+        Movie GetMovieRandom();
+        Movie GetMovieRandomByGenre(string genre);
+        //int CreateMovie(Movie m);
+        //int DeleteMovieById(int id);
+        //Movie GetMovieById(int id);
+
         IEnumerable<Movie> GetMoviesByGenres(string genres);
+        
+        string[] GetMovieGenres();
         //int UpdateMovietById(Movie mov);
     }
 }
